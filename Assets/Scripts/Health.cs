@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] UIHealthBar healthBar;
     [SerializeField] int maxHp = 1;
     int hp;
 
     void Start()
     {
-        hp = maxHp;    
+        hp = maxHp;
+        DisplayHP();
     }
     
     public void Damage(int damage)
@@ -19,5 +21,16 @@ public class Health : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DisplayHP();
     }
+
+    void DisplayHP()
+    {
+        if(healthBar != null)
+        {
+            healthBar.DisplayHP((float)hp / maxHp);
+
+        }
+    }
+
 }

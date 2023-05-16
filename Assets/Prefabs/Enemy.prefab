@@ -104,7 +104,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -690727642, guid: 53b69363becc9f24a8ba57abb019109b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866138183d9eca54dae7b216f6b63dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   maxHp: 5
 --- !u!50 &3664129561599704884
 Rigidbody2D:
@@ -231,10 +232,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -306,8 +307,8 @@ MonoBehaviour:
   aim: {fileID: 7400409666793221003}
   bulletPrefab: {fileID: 3482369914524263747, guid: c3abb4af7bb3d9e4c8e39826bf8ba3a5, type: 3}
   triggerColider: {fileID: 5714567534910515329}
-  bulletSpeed: 5
-  shootDelay: 1
+  bulletSpeed: 10
+  shootDelay: 0.6
 --- !u!61 &5714567534910515329
 BoxCollider2D:
   m_ObjectHideFlags: 0
