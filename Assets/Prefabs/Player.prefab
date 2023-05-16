@@ -127,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4154970433092265060}
   - component: {fileID: 1126852412779706910}
+  - component: {fileID: 678710685029709894}
   - component: {fileID: 1182829756030132920}
   - component: {fileID: 1599662005946385237}
   - component: {fileID: 2662890283011831742}
@@ -134,7 +135,7 @@ GameObject:
   - component: {fileID: 497602303601560096}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,6 +208,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &678710685029709894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205291965472723248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866138183d9eca54dae7b216f6b63dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 5
 --- !u!114 &1182829756030132920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,10 +320,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dc1a4211ff9eb46a78992825d13122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uIBulletDisplay: {fileID: 0}
   aim: {fileID: 5944153102011939321}
   bulletPrefab: {fileID: 3482369914524263747, guid: c3abb4af7bb3d9e4c8e39826bf8ba3a5, type: 3}
   bulletSpeed: 16
-  ammoTotal: 10
+  ammoTotal: 60
+  magCap: 10
 --- !u!82 &497602303601560096
 AudioSource:
   m_ObjectHideFlags: 0

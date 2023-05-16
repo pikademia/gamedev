@@ -78,7 +78,7 @@ public class PlayerShooting : MonoBehaviour
         {
             ammoTotal += ammoCollect.Collect();
             DisplayAmmoInfo();
+            Destroy(collision.gameObject);
         }
-        Destroy(collision.gameObject);
     }
 }

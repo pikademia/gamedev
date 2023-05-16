@@ -14,8 +14,11 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        tempPos = target.position + offset;
-        tempPos.y = 0f;
-        transform.position = tempPos;
+        if(target != null)
+        {
+            tempPos = target.position + offset;
+            tempPos.y = 0f;
+            transform.position = tempPos;
+        }
     }
 }
