@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [SerializeField] UIBulletDisplay uIBulletDisplay;
+
     [SerializeField] Transform aim;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletSpeed = 5f;
@@ -14,6 +16,11 @@ public class PlayerShooting : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        uIBulletDisplay.DisplayBullets(ammoTotal);
     }
 
     void Update()
@@ -32,9 +39,9 @@ public class PlayerShooting : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = transform.right * bulletSpeed;
             audioSource.Play();
             ammoTotal--;
+            uIBulletDisplay.DisplayBullets(ammoTotal);
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,6 +49,7 @@ public class PlayerShooting : MonoBehaviour
         if(ammoCollect != null)
         {
             ammoTotal += ammoCollect.Collect();
+            uIBulletDisplay.DisplayBullets(ammoTotal);
         }
         Destroy(collision.gameObject);
     }
