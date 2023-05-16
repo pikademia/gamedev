@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -9,9 +7,12 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] Transform aim;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletSpeed = 5f;
-    [SerializeField] int ammoTotal = 10;
+    [SerializeField] int ammoTotal = 60;
+    [SerializeField] int magCap = 10;
 
     AudioSource audioSource;
+
+    int magTemp;
 
     private void Awake()
     {
@@ -20,7 +21,8 @@ public class PlayerShooting : MonoBehaviour
 
     private void Start()
     {
-        uIBulletDisplay.DisplayBullets(ammoTotal);
+        magTemp = magCap;
+        DisplayAmmoInfo();
     }
 
     void Update()
@@ -29,18 +31,44 @@ public class PlayerShooting : MonoBehaviour
         {
             Shoot();
         }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Reload();
+        }
     }
 
     void Shoot()
     {
-        if(ammoTotal > 0)
+        if(magTemp > 0)
         {
             GameObject bullet = Instantiate(bulletPrefab, aim.position, aim.rotation);
             bullet.GetComponent<Rigidbody2D>().velocity = transform.right * bulletSpeed;
             audioSource.Play();
-            ammoTotal--;
-            uIBulletDisplay.DisplayBullets(ammoTotal);
+            magTemp--;
+            DisplayAmmoInfo();
         }
+    }
+
+    void Reload()
+    {
+        int reloadAmount = magCap - magTemp;
+        if(reloadAmount <= ammoTotal)
+        {
+            magTemp += reloadAmount;
+            ammoTotal -= reloadAmount;
+        }
+        else
+        {
+            magTemp += ammoTotal;
+            ammoTotal = 0;
+        }
+        DisplayAmmoInfo();
+    }
+
+    void DisplayAmmoInfo()
+    {
+        uIBulletDisplay.DisplayBullets(magTemp, ammoTotal);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,7 +77,7 @@ public class PlayerShooting : MonoBehaviour
         if(ammoCollect != null)
         {
             ammoTotal += ammoCollect.Collect();
-            uIBulletDisplay.DisplayBullets(ammoTotal);
+            DisplayAmmoInfo();
         }
         Destroy(collision.gameObject);
     }
