@@ -71,14 +71,4 @@ public class PlayerShooting : MonoBehaviour
         uIBulletDisplay.DisplayBullets(magTemp, ammoTotal);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        AmmoCollect ammoCollect = collision.gameObject.GetComponent<AmmoCollect>();
-        if(ammoCollect != null)
-        {
-            ammoTotal += ammoCollect.Collect();
-            DisplayAmmoInfo();
-            Destroy(collision.gameObject);
-        }
-    }
 }

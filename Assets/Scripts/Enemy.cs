@@ -11,9 +11,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] float bulletSpeed = 5f;
     [SerializeField] float shootDelay = 1f;
 
-    private void Start()
+    private void OnEnable()
     {
-        
+        UIManager.Instance.UpdateEnemy(1);
+    }
+
+    private void OnDisable()
+    {
+        UIManager.Instance.UpdateEnemy(-1);
+    }
+
+    private void Awake()
+    {
+
     }
 
     void Shoot()
