@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    int attack = 1;
+    int damage = 1;
 
+    public void Init(Vector2 dir, int damage)
+    {
+        GetComponent<Rigidbody2D>().velocity = dir;
+        this.damage = damage;
+    }
     private void Start()
     {
         Destroy(gameObject, 2f);
@@ -13,10 +18,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Health health = collision.gameObject.GetComponent<Health>();
-        if (health != null)
+        if (collision.gameObject.TryGetComponent<Health>(out Health health))
         {
-            health.Damage(attack);
+            health.Damage(damage);
         }
         Destroy(gameObject);
     }
