@@ -4,16 +4,32 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    Rigidbody2D rb;
     int damage = 1;
+    Transform parentHolder;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        parentHolder = transform.parent;
+    }
     public void Init(Vector2 dir, int damage)
     {
-        GetComponent<Rigidbody2D>().velocity = dir;
+        rb.velocity = dir;
         this.damage = damage;
     }
-    private void Start()
+    void OnEnable()
     {
-        Destroy(gameObject, 2f);
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
+        StartCoroutine(ReturnBulletToPool(2f));
+    }
+
+    IEnumerator ReturnBulletToPool(float time)
+    {
+        yield return new WaitForSeconds(time);
+        transform.SetParent(parentHolder);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,6 +38,6 @@ public class Bullet : MonoBehaviour
         {
             health.Damage(damage);
         }
-        Destroy(gameObject);
+        StartCoroutine(ReturnBulletToPool(0.0f));
     }
 }
