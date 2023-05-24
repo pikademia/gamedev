@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public abstract class Gun : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
@@ -42,7 +41,6 @@ public abstract class Gun : MonoBehaviour
         SetAnimationTrigger("shoot");
         PlaySound(0);
         bulletsInMag--;
-        Debug.Log(bulletsInMag);
     }
 
     public int Reload(int ammoTotal)
